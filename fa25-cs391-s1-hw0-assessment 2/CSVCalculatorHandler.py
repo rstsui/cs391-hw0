@@ -1,4 +1,5 @@
 import csv
+import sys
 from Calculator import Calculator
 
 class CSVCalculatorHandler:
@@ -53,3 +54,10 @@ class CSVCalculatorHandler:
             writer = csv.writer(f)
             writer.writerow(["input_file", "operation", "result", "error"])
             writer.writerows(self.history)
+
+if __name__ == '__main__':
+    # Take CSV filenames from command-line arguments
+    args = sys.argv[1:]
+    handler = CSVCalculatorHandler()
+    handler.process_csv(args)               # produce output_0.csv, output_1.csv, ...
+    handler.history_export("history.txt")   # always produce history.txt
